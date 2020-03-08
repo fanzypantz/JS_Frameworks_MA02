@@ -13,21 +13,11 @@
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
-  name: "HelloWorld",
+  name: "Recipes",
 
-  data() {
-    return {
-      recipes: null
-    };
-  },
-
-  beforeMount() {
-    axios
-      .get("https://cors-anywhere.herokuapp.com/http://www.recipepuppy.com/api")
-      .then(response => (this.recipes = response.data.results));
+  props: {
+    recipes: Array
   }
 };
 </script>

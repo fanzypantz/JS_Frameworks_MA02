@@ -1,17 +1,30 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <Recipes v-if="recipes !== null" :recipes="recipes" />
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import Recipes from "./components/recipes.vue";
+import axios from "axios";
 
 export default {
   name: "App",
   components: {
-    HelloWorld
+    Recipes
+  },
+
+  data() {
+    return {
+      recipes: null
+    };
+  },
+
+  beforeMount() {
+    axios
+      .get("https://cors-anywhere.herokuapp.com/http://www.recipepuppy.com/api")
+      .then(response => (this.recipes = response.data.results));
   }
 };
 </script>
